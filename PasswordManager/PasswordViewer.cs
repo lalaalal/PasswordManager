@@ -48,6 +48,9 @@ namespace PasswordManager
                 string name = newNameTextBox.Text;
                 string password = newPasswordTextBox.Text;
 
+                if (EmptyFillExists())
+                    throw new Exception("Please Fill All Blanks");
+
                 passwordManager.Add(name, password);
                 passwordManager.Save();
                 AddRow(no, name, password);
@@ -57,6 +60,11 @@ namespace PasswordManager
                 passwordTableLayout.RowCount--;
                 MessageBox.Show(exception.Message, "PasswordManager", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool EmptyFillExists()
+        {
+            return newNameTextBox.Text.Length == 0 && newPasswordTextBox.Text.Length == 0;
         }
 
         private void AddRow(int no, string name, string password)

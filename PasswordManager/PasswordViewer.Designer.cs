@@ -38,8 +38,10 @@
             this.passwordColumnLabel = new System.Windows.Forms.Label();
             this.nameColumnLabel = new System.Windows.Forms.Label();
             this.numColumnLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.passwordTableLayout.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -115,32 +117,30 @@
             // 
             // passwordTableLayout
             // 
-            this.passwordTableLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.passwordTableLayout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.passwordTableLayout.AutoScroll = true;
             this.passwordTableLayout.AutoSize = true;
             this.passwordTableLayout.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.passwordTableLayout.ColumnCount = 4;
             this.passwordTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.passwordTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.passwordTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.passwordTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            this.passwordTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             this.passwordTableLayout.Controls.Add(this.passwordColumnLabel, 2, 0);
             this.passwordTableLayout.Controls.Add(this.nameColumnLabel, 1, 0);
             this.passwordTableLayout.Controls.Add(this.numColumnLabel, 0, 0);
-            this.passwordTableLayout.Location = new System.Drawing.Point(12, 12);
+            this.passwordTableLayout.Location = new System.Drawing.Point(3, 3);
             this.passwordTableLayout.Name = "passwordTableLayout";
             this.passwordTableLayout.RowCount = 1;
-            this.passwordTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.passwordTableLayout.Size = new System.Drawing.Size(776, 39);
+            this.passwordTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.passwordTableLayout.Size = new System.Drawing.Size(770, 40);
             this.passwordTableLayout.TabIndex = 0;
             // 
             // passwordColumnLabel
             // 
             this.passwordColumnLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passwordColumnLabel.AutoSize = true;
-            this.passwordColumnLabel.Location = new System.Drawing.Point(489, 13);
+            this.passwordColumnLabel.Location = new System.Drawing.Point(483, 14);
             this.passwordColumnLabel.Name = "passwordColumnLabel";
             this.passwordColumnLabel.Size = new System.Drawing.Size(62, 12);
             this.passwordColumnLabel.TabIndex = 3;
@@ -150,7 +150,7 @@
             // 
             this.nameColumnLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nameColumnLabel.AutoSize = true;
-            this.nameColumnLabel.Location = new System.Drawing.Point(205, 13);
+            this.nameColumnLabel.Location = new System.Drawing.Point(203, 14);
             this.nameColumnLabel.Name = "nameColumnLabel";
             this.nameColumnLabel.Size = new System.Drawing.Size(39, 12);
             this.nameColumnLabel.TabIndex = 2;
@@ -160,18 +160,31 @@
             // 
             this.numColumnLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.numColumnLabel.AutoSize = true;
-            this.numColumnLabel.Location = new System.Drawing.Point(26, 13);
+            this.numColumnLabel.Location = new System.Drawing.Point(26, 14);
             this.numColumnLabel.Name = "numColumnLabel";
             this.numColumnLabel.Size = new System.Drawing.Size(25, 12);
             this.numColumnLabel.TabIndex = 1;
             this.numColumnLabel.Text = "No.";
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.passwordTableLayout);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(776, 392);
+            this.panel1.TabIndex = 2;
+            // 
             // PasswordViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.passwordTableLayout);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PasswordViewer";
             this.Text = "PasswordViewer";
@@ -179,6 +192,8 @@
             this.tableLayoutPanel1.PerformLayout();
             this.passwordTableLayout.ResumeLayout(false);
             this.passwordTableLayout.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,5 +210,6 @@
         private System.Windows.Forms.Label passwordColumnLabel;
         private System.Windows.Forms.Label nameColumnLabel;
         private System.Windows.Forms.Label numColumnLabel;
+        private System.Windows.Forms.Panel panel1;
     }
 }
