@@ -28,7 +28,7 @@ namespace PasswordManager
             if (!CheckIdExists() && CheckPwIsCorrect())
             {
                 MessageBox.Show("Succeed!", "Sign Up", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                userData.AddUser(idTextBox.Text, pwTextBox.Text);
+                userData.Add(idTextBox.Text, pwTextBox.Text);
                 userData.Save();
                 Dispose();
             }

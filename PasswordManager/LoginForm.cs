@@ -27,16 +27,20 @@ namespace PasswordManager
         {
             string id = idTextBox.Text;
             string pw = pwTextBox.Text;
-
-            if (userData.Authorize(id, pw))
+            try
             {
+                if (!userData.Authorize(id, pw))
+                    throw new Exception("IncorrectPassword");
                 Visible = false;
-                PasswordViewer passwordViewer = new PasswordViewer();
+                PasswordViewer passwordViewer = new PasswordViewer(id, pw);
                 passwordViewer.ShowDialog();
                 Dispose();
             }
-            else
-                MessageBox.Show("No such ID or PW", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

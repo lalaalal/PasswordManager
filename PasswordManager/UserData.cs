@@ -7,11 +7,10 @@ using System.Security.Cryptography;
 
 namespace PasswordManager
 {
-    public class UserData
+    public class UserData : Dictionary<string, string>
     {
-        private const string USER_DATA_PATH = @"user.txt";
+        private static readonly string USER_DATA_PATH = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"PasswordManager\user.txt");
 
-        private Dictionary<string, string> users;
         private static UserData userData;
 
         public static UserData GetInstance()
@@ -26,12 +25,11 @@ namespace PasswordManager
             if (!System.IO.File.Exists(USER_DATA_PATH))
                 System.IO.File.Create(USER_DATA_PATH).Close();
                 
-            users = new Dictionary<string, string>();
             string[] lines = System.IO.File.ReadAllLines(USER_DATA_PATH);
             foreach (string line in lines)
             {
                 string[] data = line.Split(';');
-                users.Add(data[0], data[1]);
+                base.Add(data[0], data[1]);
             }
         }
 
@@ -39,7 +37,7 @@ namespace PasswordManager
         public string GetPassword(string id)
         {
             string pw;
-            if (users.TryGetValue(id, out pw))
+            if (TryGetValue(id, out pw))
                 throw new KeyNotFoundException();
 
             return pw;
@@ -47,29 +45,28 @@ namespace PasswordManager
 
         public void Save()
         {
-            System.IO.TextWriter writer = new System.IO.StreamWriter(USER_DATA_PATH);
-
-            foreach (var user in users)
-                writer.WriteLine(user.Key + ';' + user.Value);
-
-            writer.Close();
+            using (System.IO.TextWriter writer = new System.IO.StreamWriter(USER_DATA_PATH))
+                foreach (var user in this)
+                    writer.WriteLine(user.Key + ';' + user.Value);
         }
 
         public bool IdExists(string id)
         {
-            return users.ContainsKey(id);
+            return ContainsKey(id);
         }
 
         public bool Authorize(string id, string pw)
         {
-            string cmp_pw;
-            return users.TryGetValue(id, out cmp_pw) && cmp_pw == HashString(pw);
+            if (!TryGetValue(id, out string cmp_pw))
+                throw new Exception("No such ID");
+            string salt = cmp_pw.Split('@')[0];
+            return cmp_pw == SHA256Hash(pw, salt);
         }
 
-        // Add password hash
-        public void AddUser(string id, string pw)
+        public new void Add(string id, string pw)
         {
-            users.Add(id, HashString(pw));
+            string salt = Guid.NewGuid().ToString();
+            base.Add(id, SHA256Hash(pw, salt));
         }
 
         public byte[] Hash(string str)
@@ -85,6 +82,18 @@ namespace PasswordManager
                 stringBuilder.Append(b.ToString("X2"));
 
             return stringBuilder.ToString();
+        }
+
+        public static string SHA256Hash(string data, string salt)
+        {
+            SHA256 sha = new SHA256Managed();
+            byte[] hash = sha.ComputeHash(Encoding.ASCII.GetBytes(data + salt));
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                stringBuilder.AppendFormat("{0:x2}", b);
+            }
+            return salt + "@" + stringBuilder.ToString();
         }
     }
 }
