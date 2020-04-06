@@ -69,21 +69,6 @@ namespace PasswordManager
             base.Add(id, SHA256Hash(pw, salt));
         }
 
-        public byte[] Hash(string str)
-        {
-            using (HashAlgorithm algorithm = SHA256.Create())
-                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(str));
-        }
-
-        public string HashString(string inputString)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (byte b in Hash(inputString))
-                stringBuilder.Append(b.ToString("X2"));
-
-            return stringBuilder.ToString();
-        }
-
         public static string SHA256Hash(string data, string salt)
         {
             SHA256 sha = new SHA256Managed();
