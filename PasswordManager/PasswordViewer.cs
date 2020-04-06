@@ -64,7 +64,7 @@ namespace PasswordManager
 
         private bool EmptyFillExists()
         {
-            return newNameTextBox.Text.Length == 0 && newPasswordTextBox.Text.Length == 0;
+            return newNameTextBox.Text.Length == 0 || newPasswordTextBox.Text.Length == 0;
         }
 
         private void AddRow(int no, string name, string password)
